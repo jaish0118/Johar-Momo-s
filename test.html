@@ -1,64 +1,11 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Transparent Momo Video</title>
-  <style>
-    body {
-      background: #f0f0f0; /* Koi bhi website background color ya image */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    #outputCanvas {
-      max-width: 100%;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-
-  <!-- Hidden Video -->
-  <video id="sourceVideo" src="WhatsApp Video 2026-10-04 at 1.09.21 AM.mp4" autoplay loop muted playsinline crossorigin="anonymous"></video>
-
-  <!-- Output Canvas jahan transparent video dikhega -->
-  <canvas id="outputCanvas"></canvas>
-
-  <script>
-    const video = document.getElementById('sourceVideo');
-    const canvas = document.getElementById('outputCanvas');
-    const ctx = canvas.getContext('2d');
-
-    video.addEventListener('play', () => {
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-
-      function renderFrame() {
-        if (!video.paused && !video.ended) {
-          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-          
-          // Pixels ko process karke green color ko transparent banana
-          const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
-          const data = frame.data;
-
-          for (let i = 0; i < data.length; i += 4) {
-            const r = data[i];     // Red
-            const g = data[i + 1]; // Green
-            const b = data[i + 2]; // Blue
-
-            // Check karein agar pixel green hai (Green Red aur Blue dono se zyada ho)
-            if (g > 100 && g > r * 1.4 && g > b * 1.4) {
-              data[i + 3] = 0; // Alpha/Opacity ko 0 (transparent) kar do
-            }
-          }
-
-          ctx.putImageData(frame, 0, 0);
-          requestAnimationFrame(renderFrame);
-        }
-      }
-      renderFrame();
-    });
-  </script>
-
+  
 </body>
 </html>
