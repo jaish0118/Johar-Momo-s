@@ -22,7 +22,7 @@ function add(n,l,p){const k=n+"|"+l;cart[k]=cart[k]?{...cart[k],q:cart[k].q+1}:{
 function chg(k,d){cart[k].q+=d;if(cart[k].q<1)delete cart[k];draw()}
 function draw(){const a=Object.entries(cart);let t=0,c=0;$("#ls").innerHTML=a.length?a.map(([k,v])=>{t+=v.p*v.q;c+=v.q;return`<div class="ln"><span>${v.n} (${v.l})<br><small>Rs ${v.p*v.q}</small></span><span><button onclick="chg('${k}',-1)">-</button> ${v.q} <button onclick="chg('${k}',1)">+</button></span></div>`}).join(""):"<p style='color:#888;padding:20px 0'>Your order is empty. Add something from the menu.</p>";
 $("#t").textContent="Rs "+t;$("#n").textContent=c;
-const msg="Hello Johar Momos, I would like to order:\n"+a.map(([k,v])=>`- ${v.n} (${v.l}) x${v.q} = Rs ${v.p*v.q}`).join("\n")+`\n\nTotal: Rs ${t}\nName:\nAddress:`;
+const msg="Hello Johar Momos, I would like to order:\n"+a.map(([k,v])=>`- ${v.n} (${v.l}) x${v.q} = Rs ${v.p*v.q}`).join("\n")+`\n\nName:\nAddress:`;
 $("#send").href=`https://wa.me/${WA}?text=`+encodeURIComponent(a.length?msg:"Hello Johar Momos, I would like to place an order.")}
 $("#fab").onclick=()=>$("#dr").classList.add("on");$("#cl").onclick=e=>{e.preventDefault();$("#dr").classList.remove("on")};$("#dr").onclick=e=>{if(e.target.id=="dr")$("#dr").classList.remove("on")};
 document.querySelectorAll("[data-wa]").forEach(a=>a.href=`https://wa.me/${WA}?text=`+encodeURIComponent("Hello Johar Momos, I would like to place an order."));
